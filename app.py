@@ -122,8 +122,9 @@ model = load_model()
 
 def inference(model, tokenizer, sentence1, sentence2, device):
     # Tokenize the input sentences
+    st.success("loading tokenizer")
     inputs = tokenizer(sentence1, sentence2, padding=True, truncation=True, return_tensors="pt", max_length=max_len)
-    
+    st.success("loaded tokenizer")
     # Move the tensors to the same device as the model (CPU or GPU)
     input_ids1 = inputs['input_ids'].detach().numpy()
     attention_mask1 = inputs['attention_mask'].detach().numpy()
