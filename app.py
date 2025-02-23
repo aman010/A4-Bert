@@ -95,7 +95,7 @@ def load_model():
             model_state_dict[name].copy_(param)  # Copy weights if the name matches
     
     # Now load the updated state dict into your model
-     st.success('Model loaded successfully!')
+    st.success('Model loaded successfully!')
 
     # pretrained_model = torch.load('./requires/Saimes', weights_only=False)  # Make sure the path is correct
     model_path = hf_hub_download(repo_id = model_id , filename='Saimes')
