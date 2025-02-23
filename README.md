@@ -30,9 +30,7 @@ Tried few experiments
 |------------------------|---------------|-------------------|--------------|-------------|
 | Bert Pretrain siamese  | 0.997         |   2.71            |     <40min   |   > 1000    |
 
-Even though the performance is showin 0.99 but it is hard to justify the models i train is not able to predict neutral examples very well may be because of fine-tuning is not done properly since the memory limitation and crashing of notebook 
-again and again. I took random shuufle sample > 1000 which also took around 16 gb of ram.More GPUS were not efficient enough to perform and gave out of memory, tarin in the loop have to convert all tensors into numpy array which added more overhead 
-but doing this was able have more control over memory. The other techniques with limited memory than just gc.collect could pyarrow paging , but i still doubt there any support for pyarrow and tensor type. More over model distillation from large model 
-would still cause the same issue. We can not just rely on those cosine similiray we need human in loop metric to evaluate best model.
+Even though the performance is showing 0.99 but it is hard to justify the models i train that are not able to predict neutral examples very well may be because of fine-tuning is not done properly since the memory limitation and crashing of notebook 
+again and again. I took random shuffle sample > 1000 which also took around 16 gb of ram. Moreover GPUs were not efficient enough to perform and gave out of memory, tarin in the loop have to convert all tensors into numpy array which added more overhead but doing this was able have more control over memory. The other techniques to work around with limited memory than just gc.collect ,could be pyarrow paging , but i still doubt if there is any support for pyarrow and tensor type. More over model distillation from large model would still cause the same issue. We can not just rely on those cosine similiray we need human in loop metric to evaluate best model.
 
 Thanks to professor that gave us chance to work on such an awsome thing doing this have raise my to-do list.
