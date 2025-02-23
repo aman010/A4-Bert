@@ -20,7 +20,7 @@ from huggingface_hub import login
 
 dataset = load_dataset("multi_nli")
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-login("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")
+login("")
 
 
 # Set page title
