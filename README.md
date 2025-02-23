@@ -11,14 +11,14 @@ which is still not possoble because of size limitation.
 
 With the above loss of pretrain Bert model we observe that it over optimzed very quickly with the training , we took 100000 samples from openweb text.
 Tried few experiments
-    number of layer to 8
-    added dropout to 0.3
-    added ReduceLROnPlateau
-    added weighted decay (L2)
-    This is the best we can get the above one is number of layers 8
-    The sample is non random of fisrt 100000 samples the training took almost an 30-45 mins
-    If enough time is left we will try to do other experiements to optimize the pretrain model
-    with this lets move to siamese network
+  *  number of layer to 8
+  *  added dropout to 0.3
+  *  added ReduceLROnPlateau
+  *  added weighted decay (L2)
+  *  This is the best we can get the above one is number of layers 8
+  *  The sample is non random of fisrt 100000 samples the training took almost an 30-45 mins
+  *  If enough time is left we will try to do other experiements to optimize the pretrain model
+  *  with this lets move to siamese network
 
 
 
