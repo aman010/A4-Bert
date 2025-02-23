@@ -75,7 +75,7 @@ bert_ = BERT(
 # pretrained_model = torch.load('./requires/BERT2', weights_only=False)  # Make sure the path is correct
 #load from huggt face the model 
 
-@st.cache(allow_output_mutation=True)
+@st.cache_resource(allow_output_mutation=True)
 def load_model():
     model_id = "Aman010/Bert-Siames"
     model_path = hf_hub_download(repo_id= model_id, filename="pytorch_model.bin")
