@@ -13,6 +13,7 @@ import torch
 from Bert import *
 from Siames import SiameseNetworkWithBERT
 import matplotlib.pyplot as plt
+from huggingface_hub import hf_hub_download
 
 dataset = load_dataset("multi_nli")
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
@@ -65,7 +66,11 @@ bert_ = BERT(
 ).to(device)  # Move model to GPU if available
 
 # Load the pretrained model weights (ensure 'BERT' is the correct path)
-pretrained_model = torch.load('./requires/BERT2', weights_only=False)  # Make sure the path is correct
+# pretrained_model = torch.load('./requires/BERT2', weights_only=False)  # Make sure the path is correct
+#load from huggt face the model 
+model_id = "Aman010/Bert-Siames"
+model_path = hf_hub_download(repo_id= model_id, filename="pytorch_model.bin")
+pretrained_model = torch.load(model_path, weights_only=False)
 pretrained_model_state_dict = pretrained_model.state_dict()
 
 # Get the model's state dict
@@ -79,7 +84,9 @@ for name, param in pretrained_model_state_dict.items():
 
 # Now load the updated state dict into your model
 
-pretrained_model = torch.load('./requires/Saimes', weights_only=False)  # Make sure the path is correct
+# pretrained_model = torch.load('./requires/Saimes', weights_only=False)  # Make sure the path is correct
+model_path = hf_hub_download(repo_id = model_id , filename='Saimes')
+pretrained_model = torch.load(model_path,weights_only=False)
 pretrained_model_state_dict = pretrained_model.state_dict()
 model = SiameseNetworkWithBERT(num_labels=3, pretrained_model_name=bert_)  # 3 classes: entailment, contradiction, neutral
 
