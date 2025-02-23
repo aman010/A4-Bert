@@ -114,7 +114,6 @@ def load_model():
         st.error(f"Failed to load model: {e}")
         return None
 
-model = load_model()
 
 def inference(model, tokenizer, sentence1, sentence2, device):
     # Tokenize the input sentences
@@ -145,7 +144,7 @@ re_=train_data.map(load_dataset)
 option1 = list(range(len(re_['premise'])))
 option2 = list(range(len(re_['hypothesis'])))
 premise = st.selectbox("select data options", option1, index = None)
-
+model = load_model()
     
 def get_sentences():
     # Dropdown to select the model
