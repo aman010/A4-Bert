@@ -78,8 +78,7 @@ bert_ = BERT(
 def load_model():
     model_id = "Aman010/Bert-Siames"
     model_path = hf_hub_download(repo_id= model_id, filename="pytorch_model.bin")
-    st.logger.info("The model is loded")
-    st.logger.info(model_path)
+    st.success('Model loaded successfully!')
     pretrained_model = torch.load(model_path, weights_only=False)
     pretrained_model_state_dict = pretrained_model.state_dict()
     
@@ -96,8 +95,7 @@ def load_model():
     
     # pretrained_model = torch.load('./requires/Saimes', weights_only=False)  # Make sure the path is correct
     model_path = hf_hub_download(repo_id = model_id , filename='Saimes')
-    st.logger.info("The model is loaded")
-    st.logger.info(model_path)
+    st.success('Model loaded successfully!')
     pretrained_model = torch.load(model_path,weights_only=False)
     pretrained_model_state_dict = pretrained_model.state_dict()
     model = SiameseNetworkWithBERT(num_labels=3, pretrained_model_name=bert_)  # 3 classes: entailment, contradiction, neutral
