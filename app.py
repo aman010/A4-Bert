@@ -144,7 +144,6 @@ re_=train_data.map(load_dataset)
 option1 = list(range(len(re_['premise'])))
 option2 = list(range(len(re_['hypothesis'])))
 premise = st.selectbox("select data options", option1, index = None)
-model = load_model()
     
 def get_sentences():
     # Dropdown to select the model
@@ -164,7 +163,8 @@ def get_label(label):
 # Button to trigger model prediction
 if st.button("Predict"):
     # Logic for handling the button click
-   
+    model = load_model()
+    
     if premise == None:
         if not input1 or not input2:
             st.warning("inputs are empty")
