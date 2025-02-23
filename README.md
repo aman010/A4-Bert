@@ -4,3 +4,8 @@
 
 ![BERT Model Screenshot](https://raw.githubusercontent.com/aman010/A4-Bert/main/Screenshot%20from%202025-02-23%2012-30-56.png)
 
+
+
+| Model                  | Accuracy_MNLI | Traning Loss MNIL | Traning Time | sample size |    
+|------------------------|---------------|-------------------|--------------|-------------|
+| Bert Pretrain siamese  | 0.997         |   2.71            |     <40min   |   > 1000    |
