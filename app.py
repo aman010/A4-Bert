@@ -14,9 +14,13 @@ from Bert import *
 from Siames import SiameseNetworkWithBERT
 import matplotlib.pyplot as plt
 from huggingface_hub import hf_hub_download
+from huggingface_hub import login
+
+
 
 dataset = load_dataset("multi_nli")
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+login("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")
 
 
 # Set page title
