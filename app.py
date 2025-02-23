@@ -78,9 +78,10 @@ bert_ = BERT(
 def load_model():
     model_id = "Aman010/Bert-Siames"
     model_path = hf_hub_download(repo_id= model_id, filename="pytorch_model.bin")
-    st.success('Model loaded successfully!')
     pretrained_model = torch.load(model_path, weights_only=False)
     pretrained_model_state_dict = pretrained_model.state_dict()
+    st.success('Model loaded successfully!',pretrained_model)
+
     
     # Get the model's state dict
     model_state_dict = bert_.state_dict()
