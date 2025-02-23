@@ -10,6 +10,7 @@ import streamlit as st
 from datasets import load_dataset
 from transformers import BertTokenizer
 import torch
+from Bert import Embedding, EncoderLayer, MultiHeadAttention, ScaledDotProductAttention, BERT, PoswiseFeedForwardNet, get_attn_pad_mask
 from Bert import *
 from Siames import SiameseNetworkWithBERT
 import matplotlib.pyplot as plt
