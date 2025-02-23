@@ -14,14 +14,9 @@ from Bert import *
 from Siames import SiameseNetworkWithBERT
 import matplotlib.pyplot as plt
 from huggingface_hub import hf_hub_download
-from huggingface_hub import login
-
 
 dataset = load_dataset("multi_nli")
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-
-# Log in with your Hugging Face token
-login(token="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")
 
 
 # Set page title
@@ -73,38 +68,44 @@ bert_ = BERT(
 # Load the pretrained model weights (ensure 'BERT' is the correct path)
 # pretrained_model = torch.load('./requires/BERT2', weights_only=False)  # Make sure the path is correct
 #load from huggt face the model 
-model_id = "Aman010/Bert-Siames"
-model_path = hf_hub_download(repo_id= model_id, filename="pytorch_model.bin")
-pretrained_model = torch.load(model_path, weights_only=False)
-pretrained_model_state_dict = pretrained_model.state_dict()
+@st.cache_resource()
+def load_model():
+    model_id = "Aman010/Bert-Siames"
+    model_path = hf_hub_download(repo_id= model_id, filename="pytorch_model.bin")
+    pretrained_model = torch.load(model_path, weights_only=False)
+    pretrained_model_state_dict = pretrained_model.state_dict()
+    
+    # Get the model's state dict
+    model_state_dict = bert_.state_dict()
+    
+    
+    # Iterate through the pretrained model's state dict and load weights
+    for name, param in pretrained_model_state_dict.items():
+        if name in model_state_dict:
+            model_state_dict[name].copy_(param)  # Copy weights if the name matches
+    
+    # Now load the updated state dict into your model
+    
+    # pretrained_model = torch.load('./requires/Saimes', weights_only=False)  # Make sure the path is correct
+    model_path = hf_hub_download(repo_id = model_id , filename='Saimes')
+    pretrained_model = torch.load(model_path,weights_only=False)
+    pretrained_model_state_dict = pretrained_model.state_dict()
+    model = SiameseNetworkWithBERT(num_labels=3, pretrained_model_name=bert_)  # 3 classes: entailment, contradiction, neutral
+    
+    # Get the model's state dict
+    model_state_dict = model.state_dict()
+    
+    # Iterate through the pretrained model's state dict and load weights
+    for name, param in pretrained_model_state_dict.items():
+        if name in model_state_dict:
+            model_state_dict[name].copy_(param)  # Copy weights if the name matches
+    
+    # Now load the updated state dict into your model
+    model.load_state_dict(model_state_dict)
+    
+    return model
 
-# Get the model's state dict
-model_state_dict = bert_.state_dict()
-
-
-# Iterate through the pretrained model's state dict and load weights
-for name, param in pretrained_model_state_dict.items():
-    if name in model_state_dict:
-        model_state_dict[name].copy_(param)  # Copy weights if the name matches
-
-# Now load the updated state dict into your model
-
-# pretrained_model = torch.load('./requires/Saimes', weights_only=False)  # Make sure the path is correct
-model_path = hf_hub_download(repo_id = model_id , filename='Saimes')
-pretrained_model = torch.load(model_path,weights_only=False)
-pretrained_model_state_dict = pretrained_model.state_dict()
-model = SiameseNetworkWithBERT(num_labels=3, pretrained_model_name=bert_)  # 3 classes: entailment, contradiction, neutral
-
-# Get the model's state dict
-model_state_dict = model.state_dict()
-
-# Iterate through the pretrained model's state dict and load weights
-for name, param in pretrained_model_state_dict.items():
-    if name in model_state_dict:
-        model_state_dict[name].copy_(param)  # Copy weights if the name matches
-
-# Now load the updated state dict into your model
-model.load_state_dict(model_state_dict)
+model = load_model()
 
 def inference(model, tokenizer, sentence1, sentence2, device):
     # Tokenize the input sentences
